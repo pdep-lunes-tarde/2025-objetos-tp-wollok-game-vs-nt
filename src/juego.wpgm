@@ -1,3 +1,5 @@
-program juego {
+import src.tpIntegrador.juegoCrossyRoad
 
+program juego {
+    juegoCrossyRoad.jugar()
 }
