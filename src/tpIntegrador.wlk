@@ -1,4 +1,5 @@
 import wollok.game.*
+import mapa.*
 import pato.*
 
 
@@ -49,6 +50,7 @@ object juegoCrossyRoad{
         keyboard.w().onPressDo {
             pato.direccion(arriba)
             pato.move()
+            
         }
         keyboard.down().onPressDo {
             pato.direccion(abajo)
@@ -59,15 +61,20 @@ object juegoCrossyRoad{
             pato.move()
         }
 
+        const auto = new Auto(position = new Position(x=0,y=0),direccion="izquierda",velocidad =1) 
+        const unaCalle = new CalleBase(y= 9, autos=[auto])
+        unaCalle.generarAutosIniciales()
+        unaCalle.moverAutos()
+
     }
 
     method jugar(){
         self.configurar()
-        mapa.generarMapa()
 
-        game.whenTimePassedDo(intervaloDeTiempo) {
-            mapa.actualizar()
-        }
         game.start()
+
+        // game.whenTimePassedDo(5000) {
+        //     mapa.actualizar()
+        // }
     }
 }
