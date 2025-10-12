@@ -1,6 +1,7 @@
 import wollok.game.*
 import mapa.*
 import pato.*
+import generarAutos.*
 
 
 object juegoCrossyRoad{
@@ -19,13 +20,27 @@ object juegoCrossyRoad{
         return intervaloDeTiempo
     }
 
-    
     method configurar(){
         game.width(self.ancho())
         game.height(self.alto())
         game.boardGround("fondo2.png")
         game.cellSize(32)
         game.addVisual(pato)
+
+        game.onTick(5000, "Moneda", {
+            const nuevaMoneda = new Moneda(position=new Position(
+                x=0.randomUpTo(self.ancho()),
+                y=0.randomUpTo(self.alto())
+                )
+            )
+
+            game.addVisual(nuevaMoneda)
+        })
+
+        game.onCollideDo(pato, {elemento => 
+        elemento.chocasteConPato(pato)
+        })
+        
 
         keyboard.right().onPressDo {
             pato.direccion(derecha)
@@ -61,20 +76,20 @@ object juegoCrossyRoad{
             pato.move()
         }
 
-        const auto = new Auto(position = new Position(x=0,y=0),direccion="izquierda",velocidad =1) 
-        const unaCalle = new CalleBase(y= 9, autos=[auto])
-        unaCalle.generarAutosIniciales()
-        unaCalle.moverAutos()
+        generartodoslosautos.generar()
 
+    }
+
+    method restart() {
+        intervaloDeTiempo = intervaloDeTiempoInicial
+        game.clear()
+        self.configurar()
+        pato.position(new Position(x=14, y=1))
     }
 
     method jugar(){
         self.configurar()
 
         game.start()
-
-        // game.whenTimePassedDo(5000) {
-        //     mapa.actualizar()
-        // }
     }
 }

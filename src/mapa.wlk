@@ -1,5 +1,8 @@
 import wollok.game.*
 import tpIntegrador.*
+import pato.*
+import generarAutos.*
+
 
 
 class Auto {
@@ -11,7 +14,7 @@ class Auto {
 
     method mover() {
         if (direccion == "izquierda") {position = position.left(velocidad)}
-        if (direccion == "derecha") {position = position.rigth(velocidad)}
+        if (direccion == "derecha") {position = position.right(velocidad)}
         if(self.estaFueraDelMapa()){
             const nuevaX = wraparound.aplicarA(position.x(), 0, juegoCrossyRoad.ancho())
             position = new Position(x=nuevaX, y=position.y())
@@ -27,6 +30,10 @@ class Auto {
         return position
     }
 
+    method chocasteConPato(unPato) {
+        juegoCrossyRoad.restart()
+    }
+
     method position(nuevaPosicion) {
         position = nuevaPosicion
     }
@@ -35,6 +42,19 @@ class Auto {
     
 }
 
+class Moneda {
+    const position
+    method image() {return "moneda.png" }
+
+    method position() {
+        return position
+    }
+
+    method chocasteConPato(pato) {
+        game.removeVisual(self)
+    }
+
+}
 object wraparound {
     method aplicarA(numero, topeInferior, topeSuperior) {
         if(numero < topeInferior) {
@@ -46,18 +66,6 @@ object wraparound {
         }
     }
 }
-object izquierda {
-    method siguientePosicion(posicion) {
-        return posicion.left(1)
-    }
-}
-object derecha {
-    method siguientePosicion(posicion) {
-        return posicion.right(1)
-    }
-}
-
-
 
 
 class CalleBase {
@@ -66,42 +74,26 @@ class CalleBase {
 
     method generarAutosIniciales() {
         autos.forEach { auto =>
-            const xInicial = if (auto.direccion() == "izquierda") juegoCrossyRoad.ancho() - 1 else 0
-            auto.position(new Position(x=xInicial, y = y))
             game.addVisual(auto)
         }
     }
 
-    method moverAutos() {
-        autos.forEach({auto=>game.onTick(200, "movimiento", { auto.mover() })})
+    method moverAutos(velocidad) {
+        autos.forEach({auto=>game.onTick(velocidad, "movimiento", { auto.mover() })})
     }       
 }
 
-// /* === Carriles individuales === */
-// object calle1 inherits CalleBase {
-//     method iniciar() { self.configurar(6,"derecha",1) }
-// }
-
-// object calle2 inherits CalleBase {
-//     method iniciar() { self.configurar(9, "izquierda", 2) }
-// }
-
-// object calle3 inherits CalleBase {
-//     method iniciar() {self.configurar(12, "derecha", 3)}
-// }
-
-// /* === Mapa general === */
-// object mapa {
-//     const calles = [calle1, calle2, calle3]
-
-//     method generarMapa() {
-//         calles.forEach { c =>
-//             c.iniciar()
-//             c.generarAutosIniciales(3)
-//         }
-//     }
-
-//     method actualizar() {
-//         calles.forEach { c => c.moverAutos() }
-//     }
-// }
+object generartodoslosautos{
+    method generar() {
+        calle1.generar()
+        calle2.generar()
+        calle3.generar()
+        calle4.generar()
+        calle5.generar()
+        calle6.generar()
+        calle7.generar()
+        calle8.generar()
+        calle9.generar()
+        calle10.generar()          
+    }
+}   

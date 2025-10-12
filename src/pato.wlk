@@ -1,5 +1,6 @@
 import wollok.game.*
 import tpIntegrador.*
+import mapa.*
 
 object pato{
     var direccion = sinDireccion
@@ -70,8 +71,8 @@ object tope {
     method aplicarA(numero, topeInferior, topeSuperior) {
         if(numero < topeInferior) {
             return topeInferior
-        } else if(numero > topeSuperior) {
-            return topeSuperior 
+        } else if(numero > topeSuperior ) {
+            return topeInferior
         } else {
             return numero
         }
