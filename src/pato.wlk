@@ -7,7 +7,7 @@ object pato{
     var posicion = new Position(x=14, y=1)
 
     method image() {
-        return "segmento.png"
+        return direccion.image()
     }
 
     method position() {
@@ -41,30 +41,28 @@ object pato{
 
 
 object izquierda {
-    method siguientePosicion(posicion) {
-        return posicion.left(1)
-    }
+    method image() { return "george_izquierda.png" }
+    method siguientePosicion(posicion) { return posicion.left(1) }
 }
-object abajo {
-    method siguientePosicion(posicion) {
-        return posicion.down(1)
-    }
-}
-object arriba {
-    method siguientePosicion(posicion) {
-        return posicion.up(1)
-    }
-}
+
 object derecha {
-    method siguientePosicion(posicion) {
-        return posicion.right(1)
-    }
+    method image() { return "george_derecha.png" }
+    method siguientePosicion(posicion) { return posicion.right(1) }
+}
+
+object arriba {
+    method image() { return "george_arriba.png" }
+    method siguientePosicion(posicion) { return posicion.up(1) }
+}
+
+object abajo {
+    method image() { return "george_abajo.png" }
+    method siguientePosicion(posicion) { return posicion.down(1) }
 }
 
 object sinDireccion {
-    method siguientePosicion(posicion) {
-        return posicion
-    }
+    method image() { return "george_arriba.png" }
+    method siguientePosicion(posicion) { return posicion }
 }
 
 object tope {

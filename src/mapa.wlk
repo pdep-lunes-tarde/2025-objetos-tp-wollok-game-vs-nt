@@ -10,7 +10,7 @@ class Auto {
     var direccion 
     const velocidad
 
-    method image() {return "auto.png" }
+    method image() {return "zombie.png" }
 
     method mover() {
         if (direccion == "izquierda") {position = position.left(velocidad)}
@@ -32,6 +32,7 @@ class Auto {
 
     method chocasteConPato(unPato) {
         juegoCrossyRoad.restart()
+        puntos.resetear()
     }
 
     method position(nuevaPosicion) {
@@ -44,7 +45,7 @@ class Auto {
 
 class Moneda {
     const position
-    method image() {return "moneda.png" }
+    method image() {return "m.png" }
 
     method position() {
         return position
@@ -52,6 +53,7 @@ class Moneda {
 
     method chocasteConPato(pato) {
         game.removeVisual(self)
+        puntos.agregarPunto(50) 
     }
 
 }
@@ -97,3 +99,40 @@ object generartodoslosautos{
         calle10.generar()          
     }
 }   
+
+object puntos {
+    var puntaje = 0
+
+    method agregarPunto() {
+        puntaje = puntaje + 1
+    }
+
+    method agregarPunto(puntajePorMoneda) {
+        puntaje = puntaje + puntajePorMoneda
+    }
+
+
+    method obtenerPuntaje() {
+        return puntaje
+    }
+    
+    method resetear() {
+        puntaje = 0
+    }
+
+    method position() {
+        return game.at(game.width() -7 , game.height() - 1)
+    }
+
+    method text() {
+       return "Puntaje: " + self.obtenerPuntaje()
+    }
+
+}
+
+
+
+
+
+
+

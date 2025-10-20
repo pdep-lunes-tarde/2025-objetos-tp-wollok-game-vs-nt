@@ -26,6 +26,7 @@ object juegoCrossyRoad{
         game.boardGround("fondo2.png")
         game.cellSize(32)
         game.addVisual(pato)
+        game.addVisual(puntos)
 
         game.onTick(5000, "Moneda", {
             const nuevaMoneda = new Moneda(position=new Position(
@@ -33,7 +34,6 @@ object juegoCrossyRoad{
                 y=0.randomUpTo(self.alto())
                 )
             )
-
             game.addVisual(nuevaMoneda)
         })
 
@@ -61,11 +61,12 @@ object juegoCrossyRoad{
         keyboard.up().onPressDo {
             pato.direccion(arriba)
             pato.move()
+            puntos.agregarPunto()
         }
         keyboard.w().onPressDo {
             pato.direccion(arriba)
             pato.move()
-            
+            puntos.agregarPunto()
         }
         keyboard.down().onPressDo {
             pato.direccion(abajo)

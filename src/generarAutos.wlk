@@ -14,8 +14,9 @@ object calle1 {
 }
 object calle2 {
     const auto = new Auto(position = new Position(x=0,y=9),direccion="derecha",velocidad =1)
-    const auto2 = new Auto(position = new Position(x=9,y=9),direccion="derecha",velocidad =1)   
-    const unaCalle = new CalleBase(y= 9, autos=[auto,auto2])
+    const auto2 = new Auto(position = new Position(x=9,y=9),direccion="derecha",velocidad =1)
+    const auto3 = new Auto(position = new Position(x=19,y=9),direccion="derecha",velocidad =1)   
+    const unaCalle = new CalleBase(y= 9, autos=[auto,auto2,auto3])
     
     method generar() {
        unaCalle.generarAutosIniciales()
@@ -25,8 +26,9 @@ object calle2 {
 
 object calle3 {
     const auto = new Auto(position = new Position(x=0,y=11),direccion="izquierda",velocidad =1) 
-    const auto2 = new Auto(position = new Position(x=11,y=11),direccion="izquierda",velocidad =1)   
-    const unaCalle = new CalleBase(y= 11, autos=[auto,auto2])
+    const auto2 = new Auto(position = new Position(x=15,y=11),direccion="izquierda",velocidad =1)  
+    const auto3 = new Auto(position = new Position(x=30,y=11),direccion="izquierda",velocidad =1)   
+    const unaCalle = new CalleBase(y= 11, autos=[auto,auto2,auto3])
     
     method generar() {
        unaCalle.generarAutosIniciales()
