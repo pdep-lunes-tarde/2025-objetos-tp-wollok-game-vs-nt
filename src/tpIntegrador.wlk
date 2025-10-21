@@ -7,6 +7,7 @@ import generarAutos.*
 object juegoCrossyRoad{
     const intervaloDeTiempoInicial = 90
     var intervaloDeTiempo = intervaloDeTiempoInicial
+    var started = false
 
     method ancho() {
         return 32
@@ -20,11 +21,15 @@ object juegoCrossyRoad{
         return intervaloDeTiempo
     }
 
-    method configurar(){
+    method configurarTablero(){
         game.width(self.ancho())
         game.height(self.alto())
-        game.boardGround("fondo2.png")
         game.cellSize(32)
+        game.boardGround("fondo01.jpg")
+    }
+
+    method configurar(){
+        
         game.addVisual(pato)
         game.addVisual(puntos)
 
@@ -83,14 +88,40 @@ object juegoCrossyRoad{
 
     method restart() {
         intervaloDeTiempo = intervaloDeTiempoInicial
-        game.clear()
-        self.configurar()
+        started = false
+        self.configurarTablero()
+        self.mostrarPortada()
+        
         pato.position(new Position(x=14, y=1))
     }
 
-    method jugar(){
-        self.configurar()
+    method mostrarPortada(){
+        started = false
 
+        game.addVisual(portada)
+
+
+        keyboard.any().onPressDo {
+            if (!started) {
+                started = true
+                game.removeVisual(portada)
+                game.clear()
+                self.configurar() 
+            }
+        }
+    }
+
+    method jugar(){
         game.start()
+        self.configurarTablero()
+
+        self.mostrarPortada()
+    
     }
 }
+
+object portada {
+    method image() { return "portada3.jpg" }
+    method position() { return new Position(x=0, y=0) } // ocupar toda la pantalla
+}
+

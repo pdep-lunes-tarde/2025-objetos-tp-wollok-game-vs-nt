@@ -127,7 +127,6 @@ object puntos {
     method text() {
        return "Puntaje: " + self.obtenerPuntaje()
     }
-
 }
 
 
