@@ -2,7 +2,7 @@ import wollok.game.*
 import tpIntegrador.*
 import mapa.*
 
-object pato{
+object george{
     var direccion = sinDireccion
     var posicion = new Position(x=14, y=1)
 

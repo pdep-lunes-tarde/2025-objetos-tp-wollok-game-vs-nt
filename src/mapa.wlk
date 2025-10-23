@@ -1,11 +1,11 @@
 import wollok.game.*
 import tpIntegrador.*
-import pato.*
-import generarAutos.*
+import george.*
+import generarZombies.*
 
 
 
-class Auto {
+class Zombie {
     var position 
     var direccion 
     const velocidad
@@ -30,9 +30,13 @@ class Auto {
         return position
     }
 
-    method chocasteConPato(unPato) {
+    method chocasteConGeorge(george) {
+        game.addVisual(gameOver)
+
         juegoCrossyRoad.restart()
-        puntos.resetear()
+
+        puntos.resetear()   
+
     }
 
     method position(nuevaPosicion) {
@@ -51,9 +55,9 @@ class Moneda {
         return position
     }
 
-    method chocasteConPato(pato) {
+    method chocasteConGeorge(george) {
         game.removeVisual(self)
-        puntos.agregarPunto(50) 
+        puntos.agregarPunto(100) 
     }
 
 }
@@ -72,20 +76,20 @@ object wraparound {
 
 class CalleBase {
     var y 
-    var autos = []
+    var zombies = []
 
-    method generarAutosIniciales() {
-        autos.forEach { auto =>
-            game.addVisual(auto)
+    method generarZombiesIniciales() {
+        zombies.forEach { zombie =>
+            game.addVisual(zombie)
         }
     }
 
-    method moverAutos(velocidad) {
-        autos.forEach({auto=>game.onTick(velocidad, "movimiento", { auto.mover() })})
+    method moverZombies(velocidad) {
+        zombies.forEach({zombie=>game.onTick(velocidad, "movimiento", { zombie.mover() })})
     }       
 }
 
-object generartodoslosautos{
+object generartodosloszombies{
     method generar() {
         calle1.generar()
         calle2.generar()
@@ -127,8 +131,16 @@ object puntos {
     method text() {
        return "Puntaje: " + self.obtenerPuntaje()
     }
+
+    method size() {
+        return 32  
+    }
 }
 
+object gameOver {
+    method image() { return "gameover.png" }
+    method position() { return new Position(x=7, y=12) } 
+}
 
 
 

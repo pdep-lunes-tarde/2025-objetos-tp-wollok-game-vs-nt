@@ -1,13 +1,12 @@
 import wollok.game.*
 import mapa.*
-import pato.*
-import generarAutos.*
+import george.*
+import generarZombies.*
 
 
 object juegoCrossyRoad{
     const intervaloDeTiempoInicial = 90
     var intervaloDeTiempo = intervaloDeTiempoInicial
-    var started = false
 
     method ancho() {
         return 32
@@ -30,7 +29,7 @@ object juegoCrossyRoad{
 
     method configurar(){
         
-        game.addVisual(pato)
+        game.addVisual(george)
         game.addVisual(puntos)
 
         game.onTick(5000, "Moneda", {
@@ -42,78 +41,81 @@ object juegoCrossyRoad{
             game.addVisual(nuevaMoneda)
         })
 
-        game.onCollideDo(pato, {elemento => 
-        elemento.chocasteConPato(pato)
+        game.onCollideDo(george, {elemento => 
+        elemento.chocasteConGeorge(george)
         })
         
 
         keyboard.right().onPressDo {
-            pato.direccion(derecha)
-            pato.move()
+            george.direccion(derecha)
+            george.move()
         }
         keyboard.d().onPressDo {
-            pato.direccion(derecha)
-            pato.move()
+            george.direccion(derecha)
+            george.move()
         }
         keyboard.left().onPressDo {
-            pato.direccion(izquierda)
-            pato.move()
+            george.direccion(izquierda)
+            george.move()
         }
         keyboard.a().onPressDo {
-            pato.direccion(izquierda)
-            pato.move()
+            george.direccion(izquierda)
+            george.move()
         }
         keyboard.up().onPressDo {
-            pato.direccion(arriba)
-            pato.move()
+            george.direccion(arriba)
+            george.move()
             puntos.agregarPunto()
         }
         keyboard.w().onPressDo {
-            pato.direccion(arriba)
-            pato.move()
+            george.direccion(arriba)
+            george.move()
             puntos.agregarPunto()
         }
         keyboard.down().onPressDo {
-            pato.direccion(abajo)
-            pato.move()
+            george.direccion(abajo)
+            george.move()
         }
         keyboard.s(){
-            pato.direccion(abajo)
-            pato.move()
+            george.direccion(abajo)
+            george.move()
         }
 
-        generartodoslosautos.generar()
+        generartodosloszombies.generar()
 
     }
 
     method restart() {
+        keyboard.any().onPressDo {
+        game.removeVisual(gameOver)
         intervaloDeTiempo = intervaloDeTiempoInicial
-        started = false
-        self.configurarTablero()
+       
+        game.clear()
+        george.position(new Position(x=14, y=1))
+
         self.mostrarPortada()
-        
-        pato.position(new Position(x=14, y=1))
+        game.start()
+        }
     }
 
     method mostrarPortada(){
-        started = false
+        
 
         game.addVisual(portada)
 
 
         keyboard.any().onPressDo {
-            if (!started) {
-                started = true
                 game.removeVisual(portada)
                 game.clear()
                 self.configurar() 
-            }
+            
         }
     }
 
     method jugar(){
-        game.start()
+        
         self.configurarTablero()
+        game.start()
 
         self.mostrarPortada()
     
