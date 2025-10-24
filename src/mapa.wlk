@@ -141,8 +141,8 @@ object puntos {
 }
 
 object gameOver {
-    method image() { return "gameover.png" }
-    method position() { return new Position(x=7, y=12) } 
+    method image() { return "gameover3.png" }
+    method position() { return new Position(x=2, y=10) } 
 }
 
 

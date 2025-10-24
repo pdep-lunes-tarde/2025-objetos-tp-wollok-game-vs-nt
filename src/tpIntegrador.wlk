@@ -149,6 +149,6 @@ object portada {
 }
 
 object victoria{
-    method image() { return "victoria.jpg" }
-    method position() { return new Position(x=9, y=8) } 
+    method image() { return "win3.png" }
+    method position() { return new Position(x=3, y=10) } 
 }
