@@ -58,6 +58,7 @@ class Moneda {
     method chocasteConGeorge(george) {
         game.removeVisual(self)
         puntos.agregarPunto(100) 
+        juegoCrossyRoad.actualizarDificultad()
     }
 
 }
@@ -84,25 +85,27 @@ class CalleBase {
         }
     }
 
-    method moverZombies(velocidad) {
-        zombies.forEach({zombie=>game.onTick(velocidad, "movimiento", { zombie.mover() })})
+    method moverZombies(velocidadBase) {
+        zombies.forEach({zombie=>game.onTick(velocidadBase, "movimiento", { zombie.mover() })})
     }       
 }
 
 object generartodosloszombies{
+    var calles = [calle1, calle2, calle3, calle4, calle5, calle6, calle7, calle8, calle9, calle10]
+
     method generar() {
-        calle1.generar()
-        calle2.generar()
-        calle3.generar()
-        calle4.generar()
-        calle5.generar()
-        calle6.generar()
-        calle7.generar()
-        calle8.generar()
-        calle9.generar()
-        calle10.generar()          
+        calles.forEach({ unaCalle => unaCalle.generar() })
     }
+
+    method actualizarVelocidadGlobal(nuevaVelocidad) {
+    calles.forEach({ calle =>
+        calle.obtenerZombies().forEach({ zombie =>
+            game.onTick(nuevaVelocidad, "movimiento", { zombie.mover() })
+        })
+    })
+}
 }   
+
 
 object puntos {
     var puntaje = 0

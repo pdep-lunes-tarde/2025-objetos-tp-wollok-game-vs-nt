@@ -7,6 +7,7 @@ import generarZombies.*
 object juegoCrossyRoad{
     const intervaloDeTiempoInicial = 90
     var intervaloDeTiempo = intervaloDeTiempoInicial
+    var velocidadZombies = 0
 
     method ancho() {
         return 32
@@ -66,11 +67,13 @@ object juegoCrossyRoad{
             george.direccion(arriba)
             george.move()
             puntos.agregarPunto()
+            self.actualizarDificultad()
         }
         keyboard.w().onPressDo {
             george.direccion(arriba)
             george.move()
             puntos.agregarPunto()
+            self.actualizarDificultad()
         }
         keyboard.down().onPressDo {
             george.direccion(abajo)
@@ -97,6 +100,24 @@ object juegoCrossyRoad{
         game.start()
         }
     }
+
+    method actualizarDificultad() {
+    const puntajeActual = puntos.obtenerPuntaje()
+
+    if (puntajeActual >= 1000) {
+        game.addVisual(victoria)
+        game.stop()
+    } else if (puntajeActual >= 250) {
+        velocidadZombies = 300
+        generartodosloszombies.actualizarVelocidadGlobal(velocidadZombies)
+    } else if (puntajeActual >= 500) {
+        velocidadZombies = 500
+        generartodosloszombies.actualizarVelocidadGlobal(velocidadZombies)
+    } else if (puntajeActual >= 750) {
+        velocidadZombies = 700
+        generartodosloszombies.actualizarVelocidadGlobal(velocidadZombies)
+    }
+}
 
     method mostrarPortada(){
         
@@ -127,3 +148,7 @@ object portada {
     method position() { return new Position(x=0, y=0) } // ocupar toda la pantalla
 }
 
+object victoria{
+    method image() { return "victoria.jpg" }
+    method position() { return new Position(x=9, y=8) } 
+}
