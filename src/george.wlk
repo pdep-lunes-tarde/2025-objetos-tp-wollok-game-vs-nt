@@ -30,7 +30,7 @@ object george{
 
     method limite(posicionACorregir) {
         const nuevaY = tope.aplicarA(posicionACorregir.y(), 0, juegoCrossyRoad.alto()-1 )
-        const nuevaX = tope.aplicarA(posicionACorregir.x(), 0, juegoCrossyRoad.ancho()-1 )
+        const nuevaX = tope.aplicarX(posicionACorregir.x(), 0, juegoCrossyRoad.ancho()-1 )
 
         return new Position(x=nuevaX, y=nuevaY)
     }
@@ -71,6 +71,16 @@ object tope {
             return topeInferior
         } else if(numero > topeSuperior ) {
             return topeInferior
+        } else {
+            return numero
+        }
+    }
+
+    method aplicarX(numero, topeIzq, topeDer) {
+        if(numero < topeIzq) {
+            return topeIzq
+        } else if(numero > topeDer ) {
+            return topeDer
         } else {
             return numero
         }

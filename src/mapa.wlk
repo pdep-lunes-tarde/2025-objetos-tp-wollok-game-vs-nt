@@ -135,9 +135,6 @@ object puntos {
        return "Puntaje: " + self.obtenerPuntaje()
     }
 
-    method size() {
-        return 32  
-    }
 }
 
 object gameOver {
