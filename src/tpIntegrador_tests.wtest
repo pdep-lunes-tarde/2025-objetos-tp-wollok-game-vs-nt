@@ -1,5 +1,58 @@
 import tpIntegrador.*
+import george.*
+import mapa.*
 
-test "Test de prueba" {
-	assert.equals(4, 2 + 2)
+describe "juegoCrossyRoad" {
+ test "si esta en el borde superior de la pantalla y se mueve hacia arriba, deberia salir por el borde inferior de la misma" {
+        const posicionInicial = new Position(x=2, y=juegoCrossyRoad.alto())
+        george.position(posicionInicial)
+        george.direccion(arriba)
+
+        george.move()
+
+        assert.equals(new Position(x=2, y=0), george.position())
+    }
+ test "si esta en el borde inferior de la pantalla y se mueve hacia abajo, no deberia moverse" {
+		const posicionInicial = new Position(x=5, y=0)
+		george.position(posicionInicial)
+		george.direccion(abajo)
+
+		george.move()
+
+		assert.equals(new Position(x=5, y=0), george.position())
+	}
+test "si esta en el borde izquierdo de la pantalla y se mueve a la izquierda no deberia moverse" {
+		const posicionInicial = new Position(x=0, y=4)
+		george.position(posicionInicial)
+		george.direccion(izquierda)
+
+		george.move()
+
+		assert.equals(new Position(x=0, y=4), george.position())
+	}
+test "si esta en el borde derecho de la pantalla y se mueve a la derecha no deberia moverse" {
+		const posicionInicial = new Position(x=juegoCrossyRoad.ancho()-1, y=6)
+		george.position(posicionInicial)
+		george.direccion(derecha)
+
+		george.move()
+
+		assert.equals(new Position(x=juegoCrossyRoad.ancho()-1, y=6), george.position())
+	}
+ 
+test "si george choca con una moneda, la moneda desaparece y se suman 100 puntos" {
+	const moneda = new Moneda(position = new Position(x=3, y=3))
+	game.addVisual(moneda)
+
+	const posicionInicialGeorge = new Position(x=3, y=2)
+	george.position(posicionInicialGeorge)
+	george.direccion(abajo)
+	
+	george.move()
+
+	moneda.chocasteConGeorge(george)
+	
+	assert.equals(100, puntos.obtenerPuntaje())
+}	
+
 }
