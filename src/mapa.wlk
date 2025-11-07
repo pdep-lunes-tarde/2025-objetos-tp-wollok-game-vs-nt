@@ -90,11 +90,11 @@ class CalleBase {
     }       
 }
 
-object generartodosloszombies{
+object generadorDeZombies{
     var calles = [calle1, calle2, calle3, calle4, calle5, calle6, calle7, calle8, calle9, calle10]
 
     method generar() {
-        calles.forEach({ unaCalle => unaCalle.generar() })
+        calles.forEach({ unaCalle => creadorDeCalles.generarCalle(unaCalle) })
     }
 
     method actualizarVelocidadGlobal(nuevaVelocidad) {

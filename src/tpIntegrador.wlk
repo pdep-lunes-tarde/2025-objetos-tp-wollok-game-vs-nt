@@ -84,7 +84,7 @@ object juegoCrossyRoad{
             george.move()
         }
 
-        generartodosloszombies.generar()
+        generadorDeZombies.generar()
 
     }
 
@@ -109,13 +109,13 @@ object juegoCrossyRoad{
         game.stop()
     } else if (puntajeActual >= 250) {
         velocidadZombies = 300
-        generartodosloszombies.actualizarVelocidadGlobal(velocidadZombies)
+        generadorDeZombies.actualizarVelocidadGlobal(velocidadZombies)
     } else if (puntajeActual >= 500) {
         velocidadZombies = 500
-        generartodosloszombies.actualizarVelocidadGlobal(velocidadZombies)
+        generadorDeZombies.actualizarVelocidadGlobal(velocidadZombies)
     } else if (puntajeActual >= 750) {
         velocidadZombies = 700
-        generartodosloszombies.actualizarVelocidadGlobal(velocidadZombies)
+        generadorDeZombies.actualizarVelocidadGlobal(velocidadZombies)
     }
 }
 
